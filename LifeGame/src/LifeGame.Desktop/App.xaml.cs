@@ -12,6 +12,7 @@ namespace LifeGame.Desktop;
 public partial class App : Application
 {
     public static IServiceProvider ServiceProvider { get; private set; } = null!;
+    public static MainWindow? MainWindowInstance { get; private set; }
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -36,8 +37,8 @@ public partial class App : Application
             Log.Information("数据库初始化完成");
         }
 
-        var mainWindow = new Views.MainWindow();
-        mainWindow.Show();
+        MainWindowInstance = new Views.MainWindow();
+        MainWindowInstance.Show();
     }
 
     private void ConfigureServices(IServiceCollection services)

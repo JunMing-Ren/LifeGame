@@ -37,25 +37,25 @@ public partial class MainViewModel : ObservableObject
 
     public IRelayCommand StartNewGameCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
-            App.ServiceProvider.GetRequiredService<GameViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<GameSetupViewModel>());
     });
 
     public IRelayCommand ContinueCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+        App.MainWindowInstance?.NavigateTo(
             App.ServiceProvider.GetRequiredService<GameViewModel>());
     });
 
     public IRelayCommand HistoryCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+        App.MainWindowInstance?.NavigateTo(
             App.ServiceProvider.GetRequiredService<HistoryViewModel>());
     });
 
     public IRelayCommand SettingsCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+        App.MainWindowInstance?.NavigateTo(
             App.ServiceProvider.GetRequiredService<SettingsViewModel>());
     });
 

@@ -146,8 +146,8 @@ public partial class GameViewModel : ObservableObject
     private void BackToMenu()
     {
         _gameService.ClearCurrentGame();
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<MainViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<MainViewModel>());
     }
 
     [RelayCommand]

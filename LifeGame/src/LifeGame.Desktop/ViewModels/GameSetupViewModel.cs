@@ -198,8 +198,8 @@ public partial class GameSetupViewModel : ObservableObject
             .StartNewGameAsync(storyTree, gameName, tags);
 
         IsGenerating = false;
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<GameViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<GameViewModel>());
     }
 
     private StoryTree CreateDemoStoryTree()
@@ -385,7 +385,7 @@ public partial class GameSetupViewModel : ObservableObject
     [RelayCommand]
     private void Cancel()
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<MainViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<MainViewModel>());
     }
 }

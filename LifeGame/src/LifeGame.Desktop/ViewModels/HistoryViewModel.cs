@@ -88,8 +88,8 @@ public partial class HistoryViewModel : ObservableObject
     private void ContinueGame(GameRecord record)
     {
         App.ServiceProvider.GetRequiredService<Services.GameService>().LoadGame(record);
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<GameViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<GameViewModel>());
     }
 
     [RelayCommand]
@@ -117,7 +117,7 @@ public partial class HistoryViewModel : ObservableObject
     [RelayCommand]
     private void Back()
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<MainViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<MainViewModel>());
     }
 }

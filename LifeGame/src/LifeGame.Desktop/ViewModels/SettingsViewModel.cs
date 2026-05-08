@@ -140,8 +140,8 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private void Back()
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>()
-            .NavigateTo(App.ServiceProvider.GetRequiredService<MainViewModel>());
+        App.MainWindowInstance?.NavigateTo(
+            App.ServiceProvider.GetRequiredService<MainViewModel>());
     }
 
     public SettingsViewModel()

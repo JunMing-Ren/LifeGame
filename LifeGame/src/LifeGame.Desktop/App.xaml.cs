@@ -54,6 +54,7 @@ public partial class App : Application
         services.AddSingleton<GameService>();
         services.AddSingleton<ArchiveService>();
         services.AddTransient<MainViewModel>();
+        services.AddTransient<GameSetupViewModel>();
         services.AddTransient<GameViewModel>();
         services.AddTransient<HistoryViewModel>();
         services.AddTransient<SettingsViewModel>();

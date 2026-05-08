@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using LifeGame.Core.Models;
-using System.IO;
 
 namespace LifeGame.Core.Data;
 
@@ -8,15 +7,8 @@ public class LifeGameDbContext : DbContext
 {
     public DbSet<GameRecord> GameRecords { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public LifeGameDbContext(DbContextOptions<LifeGameDbContext> options) : base(options)
     {
-        var dbPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "LifeGame");
-
-        Directory.CreateDirectory(dbPath);
-
-        optionsBuilder.UseSqlite($"Data Source={Path.Combine(dbPath, "lifegame.db")}");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

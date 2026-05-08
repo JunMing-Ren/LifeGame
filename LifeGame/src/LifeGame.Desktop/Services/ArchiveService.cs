@@ -6,16 +6,16 @@ namespace LifeGame.Desktop.Services;
 
 public class ArchiveService
 {
-    private readonly Func<LifeGameDbContext> _contextFactory;
+    private readonly IDbContextFactory<LifeGameDbContext> _contextFactory;
 
-    public ArchiveService()
+    public ArchiveService(IDbContextFactory<LifeGameDbContext> contextFactory)
     {
-        _contextFactory = () => new LifeGameDbContext();
+        _contextFactory = contextFactory;
     }
 
     public async Task<List<GameRecord>> GetAllRecordsAsync()
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.GameRecords
             .OrderByDescending(r => r.CreatedTime)
             .ToListAsync();
@@ -23,7 +23,7 @@ public class ArchiveService
 
     public async Task<List<GameRecord>> GetCompletedRecordsAsync()
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.GameRecords
             .Where(r => r.IsCompleted)
             .OrderByDescending(r => r.CreatedTime)
@@ -32,14 +32,14 @@ public class ArchiveService
 
     public async Task<GameRecord?> GetRecordByIdAsync(Guid recordId)
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.GameRecords
             .FirstOrDefaultAsync(r => r.RecordId == recordId);
     }
 
     public async Task SaveRecordAsync(GameRecord record)
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         var existing = await context.GameRecords
             .FirstOrDefaultAsync(r => r.RecordId == record.RecordId);
 
@@ -57,7 +57,7 @@ public class ArchiveService
 
     public async Task DeleteRecordAsync(Guid recordId)
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         var record = await context.GameRecords
             .FirstOrDefaultAsync(r => r.RecordId == recordId);
 
@@ -70,13 +70,13 @@ public class ArchiveService
 
     public async Task<int> GetRecordCountAsync()
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.GameRecords.CountAsync();
     }
 
     public async Task<Dictionary<string, int>> GetEndingStatsAsync()
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         return await context.GameRecords
             .Where(r => r.IsCompleted)
             .GroupBy(r => r.EndingType)
@@ -86,7 +86,7 @@ public class ArchiveService
 
     public async Task ToggleFavoriteAsync(Guid recordId)
     {
-        using var context = _contextFactory();
+        await using var context = await _contextFactory.CreateDbContextAsync();
         var record = await context.GameRecords
             .FirstOrDefaultAsync(r => r.RecordId == recordId);
 

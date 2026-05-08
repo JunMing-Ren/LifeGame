@@ -30,8 +30,9 @@ public partial class App : Application
 
         using (var scope = ServiceProvider.CreateScope())
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<LifeGameDbContext>();
-            dbContext.Database.EnsureCreated();
+            var dbContext = scope.ServiceProvider.GetRequiredService<IDbContextFactory<LifeGameDbContext>>();
+            using var context = dbContext.CreateDbContext();
+            context.Database.EnsureCreated();
             Log.Information("数据库初始化完成");
         }
 
@@ -46,7 +47,7 @@ public partial class App : Application
             "LifeGame");
         Directory.CreateDirectory(dbPath);
 
-        services.AddDbContext<LifeGameDbContext>(options =>
+        services.AddDbContextFactory<LifeGameDbContext>(options =>
             options.UseSqlite($"Data Source={Path.Combine(dbPath, "lifegame.db")}"));
 
         services.AddSingleton<GameService>();

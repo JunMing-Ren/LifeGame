@@ -41,7 +41,8 @@ public partial class MainViewModel : ObservableObject
 
     public IRelayCommand ContinueCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(new GameViewModel());
+        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+            App.ServiceProvider.GetRequiredService<GameViewModel>());
     });
 
     public IRelayCommand HistoryCommand => new RelayCommand(() =>

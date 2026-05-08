@@ -1,0 +1,10 @@
+<Window x:Class="LifeGame.Desktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LifeGame" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource PrimaryBrush}">
+    <Grid>
+        <ContentControl x:Name="MainContent"/>
+    </Grid>
+</Window>

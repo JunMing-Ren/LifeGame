@@ -1,0 +1,79 @@
+<UserControl x:Class="LifeGame.Desktop.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource PrimaryBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="设置" FontSize="28" FontWeight="Bold" 
+                   Foreground="{StaticResource TextBrush}" Margin="0,0,0,20"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="AI 配置" FontSize="18" Foreground="{StaticResource TextBrush}" Margin="0,0,0,10"/>
+                <Border Background="{StaticResource SecondaryBrush}" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="AI 服务商" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,5"/>
+                        <ComboBox ItemsSource="{Binding AiProviders}" 
+                                  SelectedItem="{Binding AiProvider}" 
+                                  Width="300" HorizontalAlignment="Left"/>
+
+                        <TextBlock Text="API Key" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,15,0,5"/>
+                        <PasswordBox x:Name="ApiKeyBox" Width="400" HorizontalAlignment="Left"
+                                     Background="{StaticResource PrimaryBrush}"
+                                     Foreground="{StaticResource TextBrush}"/>
+
+                        <TextBlock Text="API 端点" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,15,0,5"/>
+                        <TextBox Text="{Binding ApiEndpoint}" Width="400" HorizontalAlignment="Left"
+                                 Background="{StaticResource PrimaryBrush}"
+                                 Foreground="{StaticResource TextBrush}"/>
+
+                        <TextBlock Text="模型" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,15,0,5"/>
+                        <ComboBox ItemsSource="{Binding OpenAIModels}" 
+                                  SelectedItem="{Binding AiModel}" 
+                                  Width="300" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="生成参数" FontSize="18" Foreground="{StaticResource TextBrush}" Margin="0,0,0,10"/>
+                <Border Background="{StaticResource SecondaryBrush}" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,5">
+                            <Run Text="温度 (Temperature): "/>
+                            <Run Text="{Binding Temperature, StringFormat='{}{0:F1}'}"/>
+                        </TextBlock>
+                        <Slider Value="{Binding Temperature}" Minimum="0" Maximum="2" 
+                                Width="300" HorizontalAlignment="Left"/>
+
+                        <TextBlock Text="最大 Token 数" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,15,0,5"/>
+                        <TextBox Text="{Binding MaxTokens}" Width="150" HorizontalAlignment="Left"
+                                 Background="{StaticResource PrimaryBrush}"
+                                 Foreground="{StaticResource TextBrush}"/>
+
+                        <TextBlock Text="目标游戏时长 (分钟)" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,15,0,5"/>
+                        <TextBox Text="{Binding TargetDuration}" Width="150" HorizontalAlignment="Left"
+                                 Background="{StaticResource PrimaryBrush}"
+                                 Foreground="{StaticResource TextBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <Button Content="测试连接" Style="{StaticResource OptionButtonStyle}" 
+                        Width="150" HorizontalAlignment="Left"
+                        Command="{Binding TestConnectionCommand}"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="保存设置" Style="{StaticResource PrimaryButtonStyle}" 
+                    Width="120" Command="{Binding SaveSettingsCommand}"/>
+            <Button Content="返回" Style="{StaticResource OptionButtonStyle}" 
+                    Width="120" Command="{Binding BackCommand}"/>
+            <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource AccentBrush}" 
+                       VerticalAlignment="Center" Margin="20,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

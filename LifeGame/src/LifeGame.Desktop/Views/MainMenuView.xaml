@@ -1,0 +1,32 @@
+<UserControl x:Class="LifeGame.Desktop.Views.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource PrimaryBrush}">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="LifeGame" FontSize="48" FontWeight="Bold" 
+                       Foreground="{StaticResource TextBrush}" 
+                       HorizontalAlignment="Center" Margin="0,0,0,50"/>
+
+            <TextBlock x:Name="StatsText" FontSize="14" 
+                       Foreground="{StaticResource TextSecondaryBrush}" 
+                       HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+            <Button Content="开始新游戏" Style="{StaticResource PrimaryButtonStyle}" 
+                    Width="250" Command="{Binding StartNewGameCommand}"/>
+
+            <Button Content="继续游戏" Style="{StaticResource PrimaryButtonStyle}" 
+                    Width="250" Command="{Binding ContinueCommand}"
+                    IsEnabled="{Binding HasSavedGame}"/>
+
+            <Button Content="历史记录" Style="{StaticResource PrimaryButtonStyle}" 
+                    Width="250" Command="{Binding HistoryCommand}"/>
+
+            <Button Content="设置" Style="{StaticResource PrimaryButtonStyle}" 
+                    Width="250" Command="{Binding SettingsCommand}"/>
+
+            <Button Content="刷新" Style="{StaticResource OptionButtonStyle}" 
+                    Width="250" Margin="0,20,0,0" Command="{Binding RefreshCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -33,14 +33,20 @@ public partial class App : Application
             dbContext.Database.EnsureCreated();
             Log.Information("数据库初始化完成");
         }
+
+        var mainWindow = new Views.MainWindow();
+        mainWindow.Show();
     }
 
     private void ConfigureServices(IServiceCollection services)
     {
+        var dbPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "LifeGame");
+        Directory.CreateDirectory(dbPath);
+
         services.AddDbContext<LifeGameDbContext>(options =>
-            options.UseSqlite($"Data Source={Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "LifeGame", "lifegame.db")}"));
+            options.UseSqlite($"Data Source={Path.Combine(dbPath, "lifegame.db")}"));
 
         services.AddSingleton<GameService>();
         services.AddSingleton<ArchiveService>();

@@ -1,11 +1,18 @@
 <Application x:Class="LifeGame.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:LifeGame.Desktop.Converters"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
             </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+            <converters:StepToBoolConverter x:Key="StepToBoolConverter"/>
+            <converters:TagsConverter x:Key="TagsConverter"/>
+            <converters:CompletionConverter x:Key="CompletionConverter"/>
 
             <SolidColorBrush x:Key="PrimaryBrush" Color="#2D2D30"/>
             <SolidColorBrush x:Key="SecondaryBrush" Color="#3E3E42"/>

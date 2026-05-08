@@ -1,3 +1,4 @@
+using System.Text.Json;
 using LifeGame.Core.Models;
 
 namespace LifeGame.Desktop.Services;
@@ -32,6 +33,11 @@ public class GameService
         };
 
         OnNodeChanged?.Invoke(_currentNode);
+    }
+
+    public async Task StartNewGameAsync(StoryTree storyTree, string gameName, List<string> tags)
+    {
+        await Task.Run(() => StartNewGame(storyTree, gameName, tags));
     }
 
     public void LoadGame(GameRecord record)

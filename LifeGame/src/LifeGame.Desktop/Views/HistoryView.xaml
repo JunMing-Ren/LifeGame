@@ -58,7 +58,7 @@
                                         CommandParameter="{Binding}"/>
                                 <Button Content="删除" Style="{StaticResource OptionButtonStyle}" 
                                         Width="60" Margin="5,0"
-                                        Command="{Binding DataContext.DeleteRecordCommandCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                        Command="{Binding DataContext.DeleteRecordCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
                                         CommandParameter="{Binding}"/>
                             </StackPanel>
                         </Grid>

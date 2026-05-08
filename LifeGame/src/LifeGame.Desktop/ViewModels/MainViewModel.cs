@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LifeGame.Desktop.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LifeGame.Desktop.ViewModels;
@@ -36,7 +37,8 @@ public partial class MainViewModel : ObservableObject
 
     public IRelayCommand StartNewGameCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(new GameSetupViewModel());
+        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+            App.ServiceProvider.GetRequiredService<GameViewModel>());
     });
 
     public IRelayCommand ContinueCommand => new RelayCommand(() =>
@@ -47,12 +49,14 @@ public partial class MainViewModel : ObservableObject
 
     public IRelayCommand HistoryCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(App.ServiceProvider.GetRequiredService<HistoryViewModel>());
+        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+            App.ServiceProvider.GetRequiredService<HistoryViewModel>());
     });
 
     public IRelayCommand SettingsCommand => new RelayCommand(() =>
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(App.ServiceProvider.GetRequiredService<SettingsViewModel>());
+        App.ServiceProvider.GetRequiredService<MainWindow>().NavigateTo(
+            App.ServiceProvider.GetRequiredService<SettingsViewModel>());
     });
 
     public IRelayCommand RefreshCommand => new RelayCommand(async () => await LoadStatsAsync());

@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using LifeGame.Desktop.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LifeGame.Desktop.Views;
 

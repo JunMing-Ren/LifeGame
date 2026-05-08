@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.IO;
 
-namespace LifeGame;
+namespace LifeGame.Desktop;
 
 public partial class App : Application
 {
@@ -35,7 +35,7 @@ public partial class App : Application
             Log.Information("数据库初始化完成");
         }
 
-        var mainWindow = new Desktop.Views.MainWindow();
+        var mainWindow = new Views.MainWindow();
         mainWindow.Show();
     }
 
@@ -49,12 +49,12 @@ public partial class App : Application
         services.AddDbContext<LifeGameDbContext>(options =>
             options.UseSqlite($"Data Source={Path.Combine(dbPath, "lifegame.db")}"));
 
-        services.AddSingleton<Desktop.Services.GameService>();
-        services.AddSingleton<Desktop.Services.ArchiveService>();
-        services.AddTransient<Desktop.ViewModels.MainViewModel>();
-        services.AddTransient<Desktop.ViewModels.GameViewModel>();
-        services.AddTransient<Desktop.ViewModels.HistoryViewModel>();
-        services.AddTransient<Desktop.ViewModels.SettingsViewModel>();
+        services.AddSingleton<GameService>();
+        services.AddSingleton<ArchiveService>();
+        services.AddTransient<MainViewModel>();
+        services.AddTransient<GameViewModel>();
+        services.AddTransient<HistoryViewModel>();
+        services.AddTransient<SettingsViewModel>();
     }
 
     protected override void OnExit(ExitEventArgs e)
